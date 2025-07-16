@@ -1,5 +1,4 @@
-import { Stack } from "expo-router";
-import { Tabs } from 'expo-router';
+import { Tabs, Stack } from 'expo-router';
 import React from 'react';
 import { Ionicons } from "@expo/vector-icons";
 import { Platform } from 'react-native';
