@@ -1,12 +1,8 @@
 import { Text, View, StyleSheet } from "react-native";
 
-export default function Profile() {
+export default function userSettings() {
   return (
-    <View
-      style={styles.container}
-    >
-      <Text style={styles.text}>Profile Screen</Text>
-    </View>
+    <View/>
   );
 }
 
