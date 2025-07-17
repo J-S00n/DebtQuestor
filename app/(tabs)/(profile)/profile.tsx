@@ -13,11 +13,6 @@ export default function Profile() {
   );
 }
 
-function settingsPage() {
-  const router = useRouter();
-  router.navigate('/userSettings');
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
