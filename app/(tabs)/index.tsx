@@ -8,7 +8,7 @@ export default function Index() {
     >
       <Text style={styles.text}>Home Screen</Text>
       <View style={styles.footerContainer}>
-        <Button label="Go to Budget" theme="primary" />
+        <Button label="Go to Budget" theme="primary" onPress={() => alert('Navigating to your budget.')}/>
       </View>
     </View>
   );
