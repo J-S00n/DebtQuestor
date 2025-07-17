@@ -1,6 +1,9 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+// whenever you call a button, you must pass in a label (the text on the button),
+// and a function (onPress)
+// can also pass in an optional theme
 type Props = {
   label: string;
   theme?: 'primary';
@@ -26,7 +29,7 @@ export default function Button({ label, theme, onPress }: Props) {
 
   return (
     <View style={styles.buttonContainer}>
-      <Pressable style={styles.button} onPress={() => onPress()}>
+      <Pressable style={styles.button} onPress={onPress}>
         <Text style={styles.buttonLabel}>{label}</Text>
       </Pressable>
     </View >

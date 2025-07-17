@@ -3,18 +3,14 @@ import Button from "@/components/Button";
 import { useRouter } from 'expo-router';
 
 export default function Profile() {
+  const router = useRouter();
   return (
     <View style={styles.container}>
-      <Button label = "User Settings" onPress={settingsPage}/>
+      <Button label = "User Settings" onPress={() => router.navigate('/userSettings')}/>
       <Text style={styles.text}>Profile Screen</Text>
     </View>
 
   );
-}
-
-function settingsPage() {
-  const router = useRouter();
-  router.navigate('/userSettings');
 }
 
 const styles = StyleSheet.create({

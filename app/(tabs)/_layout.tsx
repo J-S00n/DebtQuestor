@@ -12,10 +12,6 @@ export default function TabLayout() {
           backgroundColor: '#25292e',
           borderTopWidth: 0,
         },
-        headerStyle: {
-          backgroundColor: '#d0d0d0ff',
-        },
-        headerShadowVisible: false,
       }}
     >
       <Tabs.Screen
@@ -25,6 +21,10 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? "home-sharp" : "home-outline"} size={24} color={color} />
           ),
+          headerStyle: {
+            backgroundColor: '#d0d0d0ff',
+          },
+          headerShadowVisible: false,
         }}
       />
       <Tabs.Screen
@@ -34,6 +34,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? "person" : "person-outline"} size={24} color={color} />
           ),
+          headerShown: false,
         }}
       />
 
