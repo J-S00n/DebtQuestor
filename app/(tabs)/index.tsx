@@ -1,14 +1,17 @@
-import { Text, View, StyleSheet } from "react-native";
 import Button from "@/components/Button";
+import { useRouter } from "expo-router";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function Index() {
+  const router = useRouter();
+
   return (
     <View
       style={styles.container}
     >
       <Text style={styles.text}>Home Screen</Text>
       <View style={styles.footerContainer}>
-        <Button label="Go to Budget" theme="primary" onPress={() => alert('Navigating to your budget.')}/>
+        <Button label="Go to Budget" theme="primary" onPress={() => router.navigate("/(home)/budget")} />
       </View>
     </View>
   );
