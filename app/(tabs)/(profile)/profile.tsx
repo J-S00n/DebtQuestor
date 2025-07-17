@@ -1,10 +1,10 @@
 import { Text, View, StyleSheet } from "react-native";
+import Button from "@/components/Button";
 
 export default function Profile() {
   return (
-    <View
-      style={styles.container}
-    >
+    <View style={styles.container}>
+      <Button label = "User Settings"/>
       <Text style={styles.text}>Profile Screen</Text>
     </View>
 
