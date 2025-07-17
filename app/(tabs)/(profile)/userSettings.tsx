@@ -2,7 +2,9 @@ import { Text, View, StyleSheet } from "react-native";
 
 export default function userSettings() {
   return (
-    <View/>
+    <View style={styles.container}>
+      <Text style={styles.text}>Welcome to the User Settings Page</Text>
+    </View>
   );
 }
 

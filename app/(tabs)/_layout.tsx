@@ -13,7 +13,7 @@ export default function TabLayout() {
           borderTopWidth: 0,
         },
         headerStyle: {
-          backgroundColor: '#25292e',
+          backgroundColor: '#d0d0d0ff',
         },
         headerShadowVisible: false,
       }}
