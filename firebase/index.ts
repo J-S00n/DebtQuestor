@@ -2,15 +2,18 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAQMDy4Rjoe_zKoLPZErGhNcLsim6C40c8",
-  authDomain: "debtquestor.firebaseapp.com",
-  projectId: "debtquestor",
-  storageBucket: "debtquestor.firebasestorage.app",
-  messagingSenderId: "217535842905",
-  appId: "1:217535842905:web:31f4c43e90ce4d18d4ff48",
-  measurementId: "G-7V1T2E2BSB"
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID
 };
 
 // Initialize Firebase
