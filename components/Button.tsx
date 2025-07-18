@@ -44,18 +44,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 3,
-    backgroundColor: "#d4d4d4ff"
+    backgroundColor: '#1E293B',
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.25,
+    shadowRadius: 5,
+    elevation: 6,
   },
   button: {
-    borderRadius: 10,
+    borderRadius: 12,
     width: '100%',
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+    backgroundColor: '#14B8A6', // teal-green (Tailwind teal-500)
   },
   buttonLabel: {
-    color: '#1f1e1eff',
-    fontSize: 16,
+    color: '#E2E8F0',
+    fontSize: 18,
+    fontWeight: '600',
+    marginLeft: 8,
+    textAlign: 'center',
   },
 });
+

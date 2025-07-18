@@ -6,9 +6,13 @@ export default function goal() {
     const router = useRouter();
     return (
         <View style={styles.container}>
-            {/* remember to animate the FRONT PAGE */}
-            <Text style={styles.text}>Set your goals</Text>
-            <Button label="Register now to start tracking and reaching your goals!" onPress={() => router.navigate('/signUp')}></Button>
+            <Text style={styles.title}>Set your goals</Text>
+            <View style={{ marginTop: 20, width: '90%' }}>
+                <Button
+                    label="Register now to start tracking and reaching your goals!"
+                    onPress={() => router.navigate('/signUp')}
+                />
+            </View>
         </View>
     );
 }
@@ -17,12 +21,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
-        backgroundColor: "#25292e",
+        backgroundColor: "#0F172A", // dark navy background
         alignItems: "center",
+        padding: 20,
     },
-    text: {
-        fontSize: 20,
-        color: "#fff",
-        fontWeight: "bold",
+    title: {
+        fontSize: 24,
+        color: "#F8FAFC", // bright white for title
+        fontWeight: "700",
+        textAlign: "center",
+        marginBottom: 16,
     },
 });

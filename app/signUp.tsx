@@ -7,17 +7,14 @@ import { useState } from "react";
 export default function signUp() {
     const router = useRouter();
     const navigation = useNavigation();
-    const [user, setUser] = useState("User");
-    const [pass, setPass] = useState("Password");
-    const [name, setName] = useState("Name");
-    const [age, setAge] = useState("Age");
+    const [user, setUser] = useState("");
+    const [pass, setPass] = useState("");
+    const [name, setName] = useState("");
+    const [age, setAge] = useState("");
     const resetToHome = () => {
         navigation.dispatch(
-            // common actions deletes everything currently in the stack (index, calc, goal)
-            // clearing the stack makes it so you cannot go back to intro slideshow
             CommonActions.reset({
                 index: 0,
-                //displays home page, cannot go back to intro slideshow 
                 routes: [{ name: '(tabs)' }],
             })
         );
@@ -25,45 +22,59 @@ export default function signUp() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Ready to get started? SIGN UP TODAY!</Text>
+            <Text style={styles.title}>Ready to get started? SIGN UP TODAY!</Text>
+
             <View style={styles.row}>
-                <Text style={styles.text}>Name:</Text>
+                <Text style={styles.label}>Name:</Text>
                 <TextInput
-                    onChange={() => setName}
+                    onChangeText={setName}
                     value={name}
                     style={styles.input}
+                    placeholder="Enter your name"
+                    placeholderTextColor="#94A3B8"
                 />
             </View>
 
             <View style={styles.row}>
-                <Text style={styles.text}>Age:</Text>
+                <Text style={styles.label}>Age:</Text>
                 <TextInput
-                    onChange={() => setAge}
+                    onChangeText={setAge}
                     value={age}
                     style={styles.input}
+                    placeholder="Enter your age"
+                    placeholderTextColor="#94A3B8"
+                    keyboardType="numeric"
                 />
             </View>
 
             <View style={styles.row}>
-                <Text style={styles.text}>Username:</Text>
+                <Text style={styles.label}>Username:</Text>
                 <TextInput
-                    onChange={() => setUser}
+                    onChangeText={setUser}
                     value={user}
                     style={styles.input}
+                    placeholder="Choose a username"
+                    placeholderTextColor="#94A3B8"
                 />
             </View>
 
             <View style={styles.row}>
-                <Text style={styles.text}>Password:</Text>
+                <Text style={styles.label}>Password:</Text>
                 <TextInput
-                    onChange={() => setPass}
+                    onChangeText={setPass}
                     value={pass}
                     style={styles.input}
+                    placeholder="Choose a password"
+                    placeholderTextColor="#94A3B8"
+                    secureTextEntry
                 />
             </View>
 
-            <Button label="Go to HOME page" onPress={() => resetToHome()} />
-            <View style={styles.row}>
+            <View style={{ marginTop: 20, width: '90%' }}>
+                <Button label="Go to HOME page" onPress={resetToHome} />
+            </View>
+
+            <View style={[styles.row, { justifyContent: 'center', marginTop: 20 }]}>
                 <Text style={styles.text}>Not a new user? Click here to</Text>
                 <Text style={styles.login} onPress={() => router.navigate('/login')}> log in</Text>
             </View>
@@ -75,31 +86,60 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
-        backgroundColor: "#25292e",
+        backgroundColor: "#0F172A", // dark navy consistent background
         alignItems: "center",
+        padding: 20,
     },
-    text: {
-        fontSize: 20,
-        color: "#fff",
-        fontWeight: "bold",
-    },
-    login: {
-        fontSize: 20,
-        color: "#50a3f7ff",
-        fontWeight: "bold",
-        textDecorationLine: 'underline',
+    title: {
+        fontSize: 24,
+        fontWeight: "700",
+        color: "#F8FAFC",
+        textAlign: "center",
+        marginBottom: 24,
     },
     row: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 10,
+        marginBottom: 14,
+        width: '90%',
+        justifyContent: 'space-between',
+        backgroundColor: "#1E293B", // slightly lighter container for inputs
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        borderRadius: 12,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 4,
+    },
+    label: {
+        fontSize: 16,
+        fontWeight: "600",
+        color: "#CBD5E1", // light label text
+        width: 90,
     },
     input: {
+        flex: 1,
         height: 40,
-        width: 200,
-        margin: 12,
+        backgroundColor: "#0F172A",
         borderWidth: 1,
-        padding: 10,
-        backgroundColor: "white",
+        borderColor: "#64748B",
+        borderRadius: 8,
+        paddingHorizontal: 10,
+        color: "#E2E8F0",
+        fontSize: 16,
+    },
+    text: {
+        fontSize: 16,
+        color: "#E2E8F0",
+        fontWeight: "600",
+        marginRight: 5,
+    },
+    login: {
+        fontSize: 16,
+        color: "#2563EB",
+        fontWeight: "700",
+        textDecorationLine: 'underline',
     },
 });

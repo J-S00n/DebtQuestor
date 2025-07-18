@@ -21,7 +21,7 @@ const DropdownComponent = () => {
     const renderLabel = () => {
         if (value || isFocus) {
             return (
-                <Text style={[styles.label, isFocus && { color: 'blue' }]}>
+                <Text style={[styles.label, isFocus && styles.focusedLabel]}>
                     Dropdown label
                 </Text>
             );
@@ -33,11 +33,15 @@ const DropdownComponent = () => {
         <View style={styles.container}>
             {renderLabel()}
             <Dropdown
-                style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                style={[styles.dropdown, isFocus && styles.dropdownFocus]}
                 placeholderStyle={styles.placeholderStyle}
                 selectedTextStyle={styles.selectedTextStyle}
                 inputSearchStyle={styles.inputSearchStyle}
                 iconStyle={styles.iconStyle}
+                containerStyle={styles.dropdownContainer}
+                itemTextStyle={styles.dropdownItemText}
+                itemContainerStyle={styles.dropdownItemContainer}
+                activeColor="#1E40AF" // deep blue for active item
                 data={data}
                 search
                 maxHeight={300}
@@ -55,7 +59,7 @@ const DropdownComponent = () => {
                 renderLeftIcon={() => (
                     <AntDesign
                         style={styles.icon}
-                        color={isFocus ? 'blue' : 'black'}
+                        color={isFocus ? '#2563EB' : '#94A3B8'}
                         name="Safety"
                         size={20}
                     />
@@ -69,41 +73,79 @@ export default DropdownComponent;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        backgroundColor: '#1E293B',
         padding: 16,
+        borderRadius: 12,
+        width: 200,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 4,
+        elevation: 4,
     },
     dropdown: {
         height: 50,
-        width:200,
-        borderColor: 'gray',
-        borderWidth: 0.5,
+        borderColor: '#64748B',
+        borderWidth: 1,
         borderRadius: 8,
-        paddingHorizontal: 8,
+        paddingHorizontal: 12,
+        backgroundColor: '#0F172A',
+    },
+    dropdownFocus: {
+        borderColor: '#2563EB',
     },
     icon: {
-        marginRight: 5,
+        marginRight: 8,
     },
     label: {
         position: 'absolute',
-        backgroundColor: 'white',
-        left: 22,
-        top: 8,
+        backgroundColor: '#1E293B',
+        left: 16,
+        top: -10,
         zIndex: 999,
-        paddingHorizontal: 8,
+        paddingHorizontal: 6,
         fontSize: 14,
+        color: '#CBD5E1',
+        fontWeight: '600',
+    },
+    focusedLabel: {
+        color: '#2563EB',
     },
     placeholderStyle: {
         fontSize: 16,
+        color: '#94A3B8',
     },
     selectedTextStyle: {
         fontSize: 16,
+        color: '#E2E8F0',
     },
     iconStyle: {
         width: 20,
         height: 20,
+        tintColor: '#2563EB',
     },
     inputSearchStyle: {
         height: 40,
         fontSize: 16,
+        color: '#E2E8F0',
+        backgroundColor: '#0F172A',
+        borderRadius: 8,
+        paddingHorizontal: 8,
+    },
+    dropdownContainer: {
+        backgroundColor: '#0F172A',
+        borderColor: '#2563EB',
+        borderWidth: 1,
+        borderRadius: 8,
+    },
+    dropdownItemText: {
+        color: '#E2E8F0',
+        fontSize: 16,
+        paddingVertical: 10,
+        paddingHorizontal: 12,
+    },
+    dropdownItemContainer: {
+        paddingHorizontal: 8,
+        paddingVertical: 6,
     },
 });
