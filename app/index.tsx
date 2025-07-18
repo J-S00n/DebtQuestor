@@ -42,7 +42,8 @@ export default function HomePage() {
             <MotiView
                 from={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 4400, duration: 800 }}
+                // normal delay is 4400
+                transition={{ delay: 0, duration: 800 }}
                 style={{ width: '100%', alignItems: 'center' }}
             >
                 <View style={styles.row}>

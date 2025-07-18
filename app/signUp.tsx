@@ -69,11 +69,7 @@ export default function signUp() {
                     secureTextEntry
                 />
             </View>
-
-            <View style={{ marginTop: 20, width: '90%' }}>
-                <Button label="Go to HOME page" onPress={resetToHome} />
-            </View>
-
+            <Button label="Go to HOME page" onPress={resetToHome} />
             <View style={[styles.row, { justifyContent: 'center', marginTop: 20 }]}>
                 <Text style={styles.text}>Not a new user? Click here to</Text>
                 <Text style={styles.login} onPress={() => router.navigate('/login')}> log in</Text>
