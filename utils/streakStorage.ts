@@ -25,3 +25,27 @@ export const clearStreak = async () => {
         console.error('Error clearing streak:', error);
     }
 };
+
+export const saveLastLogin = async (date: Date) => {
+    try {
+        await AsyncStorage.setItem('lastLogin', date.toISOString());
+    } catch (error) {
+        console.error('Error saving last login:', error);
+    }
+}
+
+export const yesterdayLogin = async (): Promise<Date | null> => {
+    try {
+        const value = await AsyncStorage.getItem('lastLogin');
+        if (value) {
+            const lastLoginDate = new Date(value);
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            return lastLoginDate.toDateString() === yesterday.toDateString() ? lastLoginDate : null;
+        }
+        return null;
+    } catch (error) {
+        console.error('Error checking yesterday login:', error);
+        return null;
+    }
+}
