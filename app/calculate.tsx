@@ -2,7 +2,7 @@ import { Text, View, StyleSheet } from "react-native";
 import Button from "@/components/Button";
 import { useRouter } from 'expo-router';
 
-export default function homePage() {
+export default function calculate() {
     const router = useRouter();
     return (
         <View style={styles.container}>
@@ -10,7 +10,7 @@ export default function homePage() {
             <Text style={styles.text}>You need x amount of time to get out of debt!</Text>
             <Text style={styles.text}>Thats a long time...</Text>
             <Text style={styles.text}>but we can help!</Text>
-            <Button label="Start planning your debt quest today!" onPress={()=> router.navigate('/calculate')}></Button>
+            <Button label="Start planning your debt quest today!" onPress={()=> router.navigate('/goal')}></Button>
         </View>
     );
 }

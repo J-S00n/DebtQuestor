@@ -2,7 +2,7 @@ import { Text, View, StyleSheet } from "react-native";
 import Button from "@/components/Button";
 import { useRouter } from 'expo-router';
 
-export default function homePage() {
+export default function goal() {
     const router = useRouter();
     return (
         <View style={styles.container}>
