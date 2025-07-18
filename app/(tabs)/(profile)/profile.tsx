@@ -17,26 +17,32 @@ export default function Profile() {
         <View style={styles.row}>
           <Text style={styles.text}>Name:</Text>
           <TextInput
-            onChange={() => onChangeName}
+            onChangeText={onChangeName}
             value={name}
             style={styles.input}
+            placeholderTextColor="#94A3B8"
           />
         </View>
+
         {/* age */}
         <View style={styles.row}>
           <Text style={styles.text}>Age:</Text>
           <TextInput
-            onChange={() => onChangeAge}
+            onChangeText={onChangeAge}
             value={age}
             style={styles.input}
+            placeholderTextColor="#94A3B8"
+            keyboardType="numeric"
           />
         </View>
 
-        {/* Program */}
+        {/* university */}
         <View style={styles.row}>
           <Text style={styles.text}>University:</Text>
           <Dropdown />
         </View>
+
+        {/* program */}
         <View style={styles.row}>
           <Text style={styles.text}>Program:</Text>
           <Dropdown />
@@ -52,21 +58,28 @@ export default function Profile() {
         <View style={styles.row}>
           <Text style={styles.text}>Income:</Text>
           <TextInput
-            onChange={() => onChangeIncome}
+            onChangeText={onChangeIncome}
             value={income}
             style={styles.input}
+            placeholderTextColor="#94A3B8"
+            keyboardType="numeric"
           />
         </View>
 
         {/* projected costs */}
         <View style={styles.row}>
-          <Text style={styles.text}>Projected Costs for ___:</Text>
+          <Text style={styles.text}>Projected Costs:</Text>
           <TextInput
-            readOnly
+            editable={false}
             style={styles.costs}
+            placeholder="TBD"
+            placeholderTextColor="#94A3B8"
           />
         </View>
-        <Button label="User Settings" onPress={() => router.navigate('/userSettings')} />
+
+        <View style={{ marginTop: 20 }}>
+          <Button label="User Settings" onPress={() => router.navigate('/userSettings')} />
+        </View>
 
         {/* temporary filler block for scrolling; REMOVE LATER */}
         <View style={styles.filler}></View>
@@ -77,37 +90,46 @@ export default function Profile() {
 
 const styles = StyleSheet.create({
   filler: {
-    padding: 200
+    paddingBottom: 100,
   },
   container: {
     justifyContent: "center",
-    backgroundColor: "#25292e",
+    backgroundColor: "#0F172A", // themed dark navy
     alignItems: "center",
+    paddingTop: 60,
+    paddingBottom: 30,
   },
   text: {
-    fontSize: 20,
-    color: "#fff",
-    fontWeight: "bold",
+    fontSize: 18,
+    color: "#E2E8F0", // soft light gray
+    fontWeight: "600",
+    marginRight: 10,
+    width: 120,
   },
   input: {
     height: 40,
-    width: 200,
-    margin: 12,
+    width: 180,
     borderWidth: 1,
-    padding: 10,
-    backgroundColor: "white",
+    paddingHorizontal: 10,
+    backgroundColor: "#1E293B", // darker input background
+    borderColor: "#334155",
+    color: "#E2E8F0", // light text in input
+    borderRadius: 6,
   },
   costs: {
     height: 40,
-    width: 100,
-    margin: 12,
+    width: 180,
     borderWidth: 1,
-    padding: 10,
-    backgroundColor: "white",
+    paddingHorizontal: 10,
+    backgroundColor: "#1E293B",
+    borderColor: "#334155",
+    color: "#E2E8F0",
+    borderRadius: 6,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 16,
+    paddingHorizontal: 10,
   },
 });

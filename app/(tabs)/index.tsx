@@ -28,12 +28,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#25292e",
+    backgroundColor: "#0F172A", // Updated to dark navy
     alignItems: "center",
+    paddingHorizontal: 20,
+    paddingBottom: 80, // Ensures content doesn't overlap with button
   },
   text: {
     fontSize: 20,
-    color: "#fff",
+    color: "#E2E8F0", // Soft light gray for readability
     fontWeight: "bold",
   },
   footerContainer: {
@@ -41,5 +43,7 @@ const styles = StyleSheet.create({
     bottom: 20,
     width: "100%",
     alignItems: "center",
+    paddingHorizontal: 20,
   },
 });
+

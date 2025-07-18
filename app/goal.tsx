@@ -7,12 +7,10 @@ export default function goal() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Set your goals</Text>
-            <View style={{ marginTop: 20, width: '90%' }}>
-                <Button
-                    label="Register now to start tracking and reaching your goals!"
-                    onPress={() => router.navigate('/signUp')}
-                />
-            </View>
+            <Button
+                label="Register now to start tracking and reaching your goals!"
+                onPress={() => router.navigate('/signUp')}
+            />
         </View>
     );
 }
