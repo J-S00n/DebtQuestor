@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { MotiView, MotiText } from 'moti';
-import { useRouter } from 'expo-router';
+import Button from '@/components/Button'; // replace with correct path
 import Dropdown from '@/components/Dropdown'; // replace with correct path
-import Button from '@/components/Button';     // replace with correct path
+import { useRouter } from 'expo-router';
+import { MotiText, MotiView } from 'moti';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function HomePage() {
     const router = useRouter();
@@ -42,7 +42,8 @@ export default function HomePage() {
             <MotiView
                 from={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 4400, duration: 800 }}
+                // normal delay is 4400
+                transition={{ delay: 0, duration: 800 }}
                 style={{ width: '100%', alignItems: 'center' }}
             >
                 <View style={styles.row}>

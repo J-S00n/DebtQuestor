@@ -1,8 +1,8 @@
-import { Text, View, StyleSheet } from "react-native";
 import Button from "@/components/Button";
 import { useRouter } from 'expo-router';
-import { MotiView, MotiText } from 'moti';
+import { MotiText, MotiView } from 'moti';
 import { useState } from "react";
+import { StyleSheet, View } from "react-native";
 
 export default function calculate() {
     const router = useRouter();
@@ -34,7 +34,8 @@ export default function calculate() {
             <MotiView
                 from={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 2200, duration: 600 }}
+                // normal delay is 2200
+                transition={{ delay: 0, duration: 600 }}
                 style={{ width: '100%', alignItems: 'center', marginTop: 20 }}
             >
                 <Button label="Start planning your debt quest today!" onPress={() => router.navigate('/goal')} />
