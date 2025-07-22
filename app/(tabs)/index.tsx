@@ -3,47 +3,84 @@ import StreakTracker from "@/components/StreakTracker";
 import { StreakProvider } from "@/context/StreakContext";
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
-import { Provider } from "react-native-paper";
+import { Provider, Card } from "react-native-paper";
+import { ProfileProvider, useProfileContext } from "@/context/AuthContext";
 
 export default function Index() {
   const router = useRouter();
+  const goal = "Temporary goal";
+
+  const profileContext = useProfileContext();
+  const name = profileContext?.name ?? '';
+  const user = name || 'User'; // Fallback to 'User' if name is not set
 
   return (
-    <View
-      style={styles.container}
-    >
-      <StreakProvider>
-        <Provider>
-          <StreakTracker />
-        </Provider>
-      </StreakProvider>
-      <View style={styles.footerContainer}>
-        <Button label="Go to Budget" theme="primary" onPress={() => router.navigate("/(home)/budget")} />
+    <ProfileProvider>
+      <View
+        style={styles.container}
+      >
+        <Text style={styles.text}>
+          Welcome, {user}!
+        </Text>
+        <StreakProvider>
+          <Provider>
+            <StreakTracker />
+          </Provider>
+        </StreakProvider>
+        <View style={styles.buttonContainer}>
+          <Button label="Quests" theme="primary" onPress={() => router.navigate("/(home)/quest")} />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button label="Budget" theme="primary" onPress={() => router.navigate("/(home)/budget")} />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button label="Transactions" theme="primary" onPress={() => router.navigate("/(home)/transaction")} />
+        </View>
+        <Card>
+          <Card.Content>
+            <Text style={styles.goalText}>{goal}</Text>
+          </Card.Content>
+        </Card>
       </View>
-    </View>
+    </ProfileProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    backgroundColor: "#0F172A", // Updated to dark navy
+    justifyContent: "flex-start",
+    backgroundColor: "#1E293B", // Slightly lighter navy for depth
     alignItems: "center",
-    paddingHorizontal: 20,
-    paddingBottom: 80, // Ensures content doesn't overlap with button
+    paddingHorizontal: 24,
+    paddingTop: 48,
+    paddingBottom: 40,
   },
   text: {
-    fontSize: 20,
-    color: "#E2E8F0", // Soft light gray for readability
+    fontSize: 26,
+    color: "#F1F5F9", // Brighter for welcome
     fontWeight: "bold",
+    marginBottom: 18,
+    letterSpacing: 1,
+    textShadowColor: "#334155",
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
   },
-  footerContainer: {
-    position: "absolute",
-    bottom: 20,
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
     width: "100%",
-    alignItems: "center",
-    paddingHorizontal: 20,
+    marginTop: 16,
+    marginBottom: 4,
+    gap: 8,
+  },
+  goalText: {
+    fontSize: 18,
+    color: "#38BDF8", // Accent color for goal
+    fontWeight: "600",
+    textAlign: "center",
+    marginTop: 8,
+    marginBottom: 4,
   },
 });
 

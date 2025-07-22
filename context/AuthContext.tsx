@@ -19,6 +19,8 @@ interface profileContextType {
     setUsername: (username: string) => void;
     password: string;
     setPassword: (password: string) => void;
+    email?: string; // Optional field for email
+    setEmail?: (email: string) => void; // Optional setter for email
 }
 
 const ProfileContext = createContext<profileContextType | undefined>(undefined);
@@ -33,11 +35,13 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const [costOfLiving, setCostOfLiving] = useState(0);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState(''); // Optional email state
 
     return (
         <ProfileContext.Provider value={{
             name, setName, age, setAge, university, setUniversity, program, setProgram, rent, setRent, 
-            income, setIncome, costOfLiving, setCostOfLiving, username, setUsername, password, setPassword
+            income, setIncome, costOfLiving, setCostOfLiving, username, setUsername, password, setPassword,
+            email, setEmail
         }}>
             {children}
         </ProfileContext.Provider>

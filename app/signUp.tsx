@@ -13,12 +13,14 @@ export default function signUp() {
     const setAge = profileContext?.setAge ?? (() => { });
     const setUsername = profileContext?.setUsername ?? (() => { });
     const setPassword = profileContext?.setPassword ?? (() => { });
+    const setEmail = profileContext?.setEmail ?? (() => { });
 
     // Local state for input fields
     const [name, setNameLocal] = useState("");
     const [age, setAgeLocal] = useState("");
     const [username, setUsernameLocal] = useState("");
     const [password, setPasswordLocal] = useState("");
+    const [email, setEmailLocal] = useState("");
 
     const resetToHome = () => {
         // Prevent navigation if required fields are not filled
@@ -26,16 +28,31 @@ export default function signUp() {
             !name.trim() ||
             !age.trim() ||
             !username.trim() ||
-            !password.trim()
+            !password.trim() ||
+            !email.trim()
         ) {
             alert("Please fill in all fields");
             return;
         }
+
+        if (
+            isNaN(Number(age)) ||
+            Number(age) <= 12 ||
+            email.indexOf('@') === -1 ||
+            email.indexOf('.') === -1 ||
+            !/^[a-zA-Z0-9]+$/.test(username) ||
+            password.length < 6
+        ) {
+            alert("Please ensure you are at least 13 years old, your username contains only letters and numbers, and your password is at least 6 characters long, and your email is valid.");
+            return;
+        }
+
         // Update context before navigation
         setName(name);
         setAge(Number(age));
         setUsername(username);
         setPassword(password);
+        setEmail(email);
 
         navigation.dispatch(
             CommonActions.reset({
@@ -69,6 +86,17 @@ export default function signUp() {
                     placeholder="Enter your age"
                     placeholderTextColor="#94A3B8"
                     keyboardType="numeric"
+                />
+            </View>
+
+            <View style={styles.row}>
+                <Text style={styles.label}>Email:</Text>
+                <TextInput
+                    value={email}
+                    onChangeText={setEmailLocal}
+                    style={styles.input}
+                    placeholder="Enter your email"
+                    placeholderTextColor="#94A3B8"
                 />
             </View>
 
