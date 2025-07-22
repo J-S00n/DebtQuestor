@@ -48,12 +48,41 @@ export default function HomePage() {
             >
                 <View style={styles.row}>
                     <Text style={styles.label}>University:</Text>
-                    <Dropdown />
+                    <Dropdown data={[
+                        { label: 'Algoma University', value: 'algoma' },
+                        { label: 'Brock University', value: 'brock' },
+                        { label: 'Carleton University', value: 'carleton' },
+                        { label: 'Collège Universitaire Dominicain', value: 'cud' },
+                        { label: 'Lakehead University', value: 'lakehead' },
+                        { label: 'Laurentian University', value: 'laurentian' },
+                        { label: 'McMaster', value: 'mac' },
+                        { label: 'Nipissing University', value: 'nipissing' },
+                        { label: 'OCAD University', value: 'ocad' },
+                        { label: 'Ontario Tech University', value: 'otech' },
+                        { label: 'Queen\'s University', value: 'queens' },
+                        { label: 'Redeemer University', value: 'redeemer' },
+                        { label: 'Royal Military College of Canada', value: 'military' },
+                        { label: 'TMU', value: 'tmu' },
+                        { label: 'Trent University', value: 'trent' },
+                        { label: 'Université de Hearst', value: 'hearst' },
+                        { label: 'University of Guelph', value: 'guelph' },
+                        { label: 'University of Ottawa', value: 'ottawa' },
+                        { label: 'University of Toronto', value: 'uoft' },
+                        { label: 'University of Waterloo', value: 'loo' },
+                        { label: 'University of Windsor', value: 'windsor' },
+                        { label: 'Western University', value: 'western' },
+                        { label: 'Wilfrid Laurier University', value: 'wilfrid' },
+                        { label: 'York University', value: 'york' }]} title={'University'} />
                 </View>
 
                 <View style={styles.row}>
                     <Text style={styles.label}>Program:</Text>
-                    <Dropdown />
+                    <Dropdown data={[
+                        { label: 'Art', value: 'art' },
+                        { label: 'Computer Science', value: 'cs' },
+                        { label: 'Engineering', value: 'eng' },
+                        { label: 'Health Sciences', value: 'health' },
+                        { label: 'Mathematics', value: 'math' }]} title={'Program'} />
                 </View>
 
                 <Button label="Calculate Debt" onPress={() => router.navigate('/calculate')} />
