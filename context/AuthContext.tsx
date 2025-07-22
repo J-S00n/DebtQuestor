@@ -15,6 +15,10 @@ interface profileContextType {
     setRent: (rent: number) => void;
     setIncome: (income: number) => void;
     setCostOfLiving: (costOfLiving: number) => void;
+    username: string;
+    setUsername: (username: string) => void;
+    password: string;
+    setPassword: (password: string) => void;
 }
 
 const ProfileContext = createContext<profileContextType | undefined>(undefined);
@@ -27,11 +31,13 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const [rent, setRent] = useState(0);
     const [income, setIncome] = useState(0);
     const [costOfLiving, setCostOfLiving] = useState(0);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     return (
         <ProfileContext.Provider value={{
-            name, setName, age, setAge, university, setUniversity,
-            program, setProgram, rent, setRent, income, setIncome, costOfLiving, setCostOfLiving
+            name, setName, age, setAge, university, setUniversity, program, setProgram, rent, setRent, 
+            income, setIncome, costOfLiving, setCostOfLiving, username, setUsername, password, setPassword
         }}>
             {children}
         </ProfileContext.Provider>

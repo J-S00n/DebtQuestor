@@ -3,15 +3,40 @@ import Button from "@/components/Button";
 import { useRouter } from 'expo-router';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { useState } from "react";
+import { useProfileContext } from "@/context/AuthContext";
 
 export default function signUp() {
     const router = useRouter();
     const navigation = useNavigation();
-    const [user, setUser] = useState("");
-    const [pass, setPass] = useState("");
-    const [name, setName] = useState("");
-    const [age, setAge] = useState("");
+    const profileContext = useProfileContext();
+    const setName = profileContext?.setName ?? (() => { });
+    const setAge = profileContext?.setAge ?? (() => { });
+    const setUsername = profileContext?.setUsername ?? (() => { });
+    const setPassword = profileContext?.setPassword ?? (() => { });
+
+    // Local state for input fields
+    const [name, setNameLocal] = useState("");
+    const [age, setAgeLocal] = useState("");
+    const [username, setUsernameLocal] = useState("");
+    const [password, setPasswordLocal] = useState("");
+
     const resetToHome = () => {
+        // Prevent navigation if required fields are not filled
+        if (
+            !name.trim() ||
+            !age.trim() ||
+            !username.trim() ||
+            !password.trim()
+        ) {
+            alert("Please fill in all fields");
+            return;
+        }
+        // Update context before navigation
+        setName(name);
+        setAge(Number(age));
+        setUsername(username);
+        setPassword(password);
+
         navigation.dispatch(
             CommonActions.reset({
                 index: 0,
@@ -27,8 +52,8 @@ export default function signUp() {
             <View style={styles.row}>
                 <Text style={styles.label}>Name:</Text>
                 <TextInput
-                    onChangeText={setName}
                     value={name}
+                    onChangeText={setNameLocal}
                     style={styles.input}
                     placeholder="Enter your name"
                     placeholderTextColor="#94A3B8"
@@ -38,8 +63,8 @@ export default function signUp() {
             <View style={styles.row}>
                 <Text style={styles.label}>Age:</Text>
                 <TextInput
-                    onChangeText={setAge}
                     value={age}
+                    onChangeText={setAgeLocal}
                     style={styles.input}
                     placeholder="Enter your age"
                     placeholderTextColor="#94A3B8"
@@ -50,8 +75,8 @@ export default function signUp() {
             <View style={styles.row}>
                 <Text style={styles.label}>Username:</Text>
                 <TextInput
-                    onChangeText={setUser}
-                    value={user}
+                    value={username}
+                    onChangeText={setUsernameLocal}
                     style={styles.input}
                     placeholder="Choose a username"
                     placeholderTextColor="#94A3B8"
@@ -61,8 +86,8 @@ export default function signUp() {
             <View style={styles.row}>
                 <Text style={styles.label}>Password:</Text>
                 <TextInput
-                    onChangeText={setPass}
-                    value={pass}
+                    value={password}
+                    onChangeText={setPasswordLocal}
                     style={styles.input}
                     placeholder="Choose a password"
                     placeholderTextColor="#94A3B8"
