@@ -43,7 +43,7 @@ export default function HomePage() {
                 from={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 // normal delay is 4400
-                transition={{ delay: 0, duration: 800 }}
+                transition={{ delay: 4400, duration: 800 }}
                 style={{ width: '100%', alignItems: 'center' }}
             >
                 <View style={styles.row}>
