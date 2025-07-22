@@ -5,14 +5,14 @@ import { useRouter } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 import { Provider, Card } from "react-native-paper";
 import { ProfileProvider, useProfileContext } from "@/context/AuthContext";
+import { auth } from "@/firebase";  
 
 export default function Index() {
   const router = useRouter();
   const goal = "Temporary goal";
 
   const profileContext = useProfileContext();
-  const name = profileContext?.name ?? '';
-  const user = name || 'User'; // Fallback to 'User' if name is not set
+  const {user} = profileContext || { user: "Guest" };
 
   return (
     <ProfileProvider>
@@ -20,7 +20,7 @@ export default function Index() {
         style={styles.container}
       >
         <Text style={styles.text}>
-          Welcome, {user}!
+          Welcome, {user.displayName}!
         </Text>
         <StreakProvider>
           <Provider>

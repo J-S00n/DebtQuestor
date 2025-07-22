@@ -4,55 +4,72 @@ import { useRouter } from 'expo-router';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { useState } from "react";
 import { useProfileContext } from "@/context/AuthContext";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, firestore } from "@/firebase"; // Adjust the import path as necessary
+import { doc, setDoc } from "firebase/firestore";
 
 export default function signUp() {
     const router = useRouter();
     const navigation = useNavigation();
+
     const profileContext = useProfileContext();
-    const setName = profileContext?.setName ?? (() => { });
-    const setAge = profileContext?.setAge ?? (() => { });
-    const setUsername = profileContext?.setUsername ?? (() => { });
-    const setPassword = profileContext?.setPassword ?? (() => { });
-    const setEmail = profileContext?.setEmail ?? (() => { });
+    const setUser = profileContext?.setUser ?? (() => { });
 
     // Local state for input fields
-    const [name, setNameLocal] = useState("");
-    const [age, setAgeLocal] = useState("");
-    const [username, setUsernameLocal] = useState("");
-    const [password, setPasswordLocal] = useState("");
-    const [email, setEmailLocal] = useState("");
+    const [userData, setUserData] = useState({
+        name: '',
+        age: '',
+        email: '',
+        username: '',
+        password: ''
+    });
 
-    const resetToHome = () => {
+    const resetToHome = async () => {
         // Prevent navigation if required fields are not filled
         if (
-            !name.trim() ||
-            !age.trim() ||
-            !username.trim() ||
-            !password.trim() ||
-            !email.trim()
+            !userData.name.trim() ||
+            !userData.age.trim() ||
+            !userData.username.trim() ||
+            !userData.password.trim() ||
+            !userData.email.trim()
         ) {
             alert("Please fill in all fields");
             return;
         }
 
         if (
-            isNaN(Number(age)) ||
-            Number(age) <= 12 ||
-            email.indexOf('@') === -1 ||
-            email.indexOf('.') === -1 ||
-            !/^[a-zA-Z0-9]+$/.test(username) ||
-            password.length < 6
+            isNaN(Number(userData.age)) ||
+            Number(userData.age) <= 12 ||
+            userData.email.indexOf('@') === -1 ||
+            userData.email.indexOf('.') === -1 ||
+            !/^[a-zA-Z0-9]+$/.test(userData.username) ||
+            userData.password.length < 6
         ) {
             alert("Please ensure you are at least 13 years old, your username contains only letters and numbers, and your password is at least 6 characters long, and your email is valid.");
             return;
         }
 
-        // Update context before navigation
-        setName(name);
-        setAge(Number(age));
-        setUsername(username);
-        setPassword(password);
-        setEmail(email);
+        try {
+            const result = await createUserWithEmailAndPassword(
+                auth,
+                userData.email,
+                userData.password
+            );
+            await updateProfile(result.user, {
+                displayName: userData.name,
+            });
+            setUser(result.user);
+            const docRef = doc(firestore, 'users', result.user.uid);
+            await setDoc(docRef, {
+                age: Number(userData.age),
+                username: userData.username,
+                email: userData.email,
+            });
+        } catch (error) {
+            console.error("Error signing up:", error);
+            alert("Error signing up. Please try again.");
+            return;
+        }
 
         navigation.dispatch(
             CommonActions.reset({
@@ -69,8 +86,8 @@ export default function signUp() {
             <View style={styles.row}>
                 <Text style={styles.label}>Name:</Text>
                 <TextInput
-                    value={name}
-                    onChangeText={setNameLocal}
+                    value={userData.name}
+                    onChangeText={(text) => setUserData({ ...userData, name: text })}
                     style={styles.input}
                     placeholder="Enter your name"
                     placeholderTextColor="#94A3B8"
@@ -80,8 +97,8 @@ export default function signUp() {
             <View style={styles.row}>
                 <Text style={styles.label}>Age:</Text>
                 <TextInput
-                    value={age}
-                    onChangeText={setAgeLocal}
+                    value={userData.age}
+                    onChangeText={(text) => setUserData({ ...userData, age: text })}
                     style={styles.input}
                     placeholder="Enter your age"
                     placeholderTextColor="#94A3B8"
@@ -92,8 +109,8 @@ export default function signUp() {
             <View style={styles.row}>
                 <Text style={styles.label}>Email:</Text>
                 <TextInput
-                    value={email}
-                    onChangeText={setEmailLocal}
+                    value={userData.email}
+                    onChangeText={(text) => setUserData({ ...userData, email: text })}
                     style={styles.input}
                     placeholder="Enter your email"
                     placeholderTextColor="#94A3B8"
@@ -101,21 +118,10 @@ export default function signUp() {
             </View>
 
             <View style={styles.row}>
-                <Text style={styles.label}>Username:</Text>
-                <TextInput
-                    value={username}
-                    onChangeText={setUsernameLocal}
-                    style={styles.input}
-                    placeholder="Choose a username"
-                    placeholderTextColor="#94A3B8"
-                />
-            </View>
-
-            <View style={styles.row}>
                 <Text style={styles.label}>Password:</Text>
                 <TextInput
-                    value={password}
-                    onChangeText={setPasswordLocal}
+                    value={userData.password}
+                    onChangeText={(text) => setUserData({ ...userData, password: text })}
                     style={styles.input}
                     placeholder="Choose a password"
                     placeholderTextColor="#94A3B8"

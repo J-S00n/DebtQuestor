@@ -4,28 +4,49 @@ import { useRouter } from 'expo-router';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { useState } from "react";
 import { useProfileContext } from "@/context/AuthContext";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, firestore } from "@/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 export default function login() {
     const router = useRouter();
     const navigation = useNavigation();
     const profileContext = useProfileContext();
-    const username = profileContext?.username ?? '';
-    const password = profileContext?.password ?? '';
+    const {setUser} = profileContext || { setUser: () => {} };
 
     const [inputData, setInputData] = useState({
         user: '',
         pass: '',
     });
 
-    function loggin() {
+    const login = async()=> {
         // Prevent navigation if required fields are not filled
         if (!inputData.user.trim() || !inputData.pass.trim()) {
             alert("Please fill in all fields");
             return;
         }
 
-        if (inputData.user !== username || inputData.pass !== password) {
-            alert("Incorrect username or password");
+        try {
+            const result = await signInWithEmailAndPassword(
+                auth,
+                inputData.user,
+                inputData.pass
+            );
+            const userDoc = await getDoc(doc(firestore, "users", result.user.uid));
+            if (userDoc.exists()) {
+                const userData = userDoc.data();
+                setUser({
+                    displayName: userData.name,
+                    age: userData.age,
+                    email: userData.email,
+                    username: inputData.user, // Assuming username is the same as email
+                });
+            } else {
+                console.error("No such document!");
+            }
+        } catch (error) {
+            console.error("Error signing in:", error);
+            alert("Login failed. Please check your credentials.");
             return;
         }
 
@@ -63,7 +84,7 @@ export default function login() {
                     secureTextEntry
                 />
             </View>
-            <Button label="Log In" onPress={() => { loggin() }} />
+            <Button label="Log In" onPress={() => { login() }} />
         </View>
     );
 }
